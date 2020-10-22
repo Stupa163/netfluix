@@ -1,13 +1,18 @@
 <template>
     <div>
-        Todo
     </div>
 </template>
 
 <script>
     export default {
-        name: "Login"
+        name: "Login",
+        methods: {
+            getAuthorization(){
+                //Appel depuis vuex
+            }
+        }
     }
+
 </script>
 
 <style scoped>

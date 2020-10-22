@@ -5,7 +5,7 @@
         </div>
         <div class="login">
             <router-link :to="{name: 'Login'}">
-                <button class="btn">S'identifier</button>
+                <button class="btn">S'identifier via TMDB</button>
             </router-link>
         </div>
     </header>
