@@ -4,16 +4,26 @@
             <img alt="Vue logo" src="../assets/logo.png">
         </div>
         <div class="login">
-            <router-link :to="{name: 'Login'}">
-                <button class="btn">S'identifier via TMDB</button>
-            </router-link>
+            <button class="btn" @click="login">{{getUsername}} S'identifier via TMDB</button>
         </div>
     </header>
 </template>
 
 <script>
+import { mapActions } from "vuex";
+import { mapGetters } from "vuex";
     export default {
-        name: "Header"
+        name: "Header",
+        methods: {
+            ...mapActions({
+                login: 'getAuthorization',
+            })
+        },
+        computed: {
+            ...mapGetters([
+                'getUsername'
+            ])
+        }
     }
 </script>
 

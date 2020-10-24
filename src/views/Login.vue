@@ -1,20 +1,23 @@
 <template>
-    <div>
-    </div>
+  <div>
+  </div>
 </template>
 
 <script>
-    export default {
-        name: "Login",
-        methods: {
-            getAuthorization(){
-                //Appel depuis vuex
-            }
-        }
-    }
+import { mapActions } from "vuex";
 
+export default {
+  name: "Login",
+  methods: {
+    ...mapActions({
+      getSessionID: "getSessionID",
+      getUserAccount: "getUserAccount"
+    }),
+  },
+  async mounted(){
+    let session_id = await this.getSessionID(this.$route.query.request_token)
+    let user_info = await this.getUserAccount(session_id)
+    this.$router.push({name: 'Home'})
+  }
+};
 </script>
-
-<style scoped>
-
-</style>
