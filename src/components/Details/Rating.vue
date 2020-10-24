@@ -2,9 +2,10 @@
     <b-container class="rating">
         <b-row>
             <span class="label">Note :</span>
-            <span class="vote_average">
+            <span class="vote_average" v-if="note">
                 <b-progress class="progress_bar" :value="note * 10" max="100" show-value variant="warning"/>
             </span>
+            <span v-else>Pas de note disponible</span>
         </b-row>
     </b-container>
 </template>
@@ -14,7 +15,7 @@
         name: "Rating",
         props: {
             note: {
-                type: String,
+                type: Number,
                 required: true
             }
         }
