@@ -2,7 +2,8 @@
     <b-container class="overview">
         <b-row>
             <span class="label">Description :</span>
-            <p>{{overview}}</p>
+            <p v-if="overview">{{overview}}</p>
+            <span v-else>Pas de description disponible</span>
         </b-row>
     </b-container>
 </template>
