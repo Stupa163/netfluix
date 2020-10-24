@@ -17,7 +17,14 @@
 <script>
   import Header from "./components/Header";
   import Footer from "./components/Footer";
+
   export default {
-    components: {Footer, Header}
+    components: {Footer, Header},
+    created() {
+      //Récupération infos utilisateur pour connexion automatique
+      if(this.$store.getters.isLogged){
+        this.$store.dispatch('getUserAccount', localStorage.getItem('session_id'))
+      }
+    }
   }
 </script>
