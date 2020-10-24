@@ -5,7 +5,8 @@ const ENDPOINTS = {
     LATEST: '/movie/latest',
     BEST: '/movie/top_rated',
     UPCOMING: '/movie/upcoming',
-    PLAYING_NOW: '/movie/now_playing'
+    PLAYING_NOW: '/movie/now_playing',
+    DETAILS: '/movie'
 };
 
 export default {
@@ -29,12 +30,16 @@ export default {
         getPlayingNowMovies: async (page = 1) => {
             let res = await executeRequest(ENDPOINTS.PLAYING_NOW, {page});
             return await res.json();
+        },
+        getMovieDetails: async (id) => {
+            let res = await executeRequest(`${ENDPOINTS.DETAILS}/${id}`)
+            return await res.json();
         }
     }
 }
 
 async function executeRequest(endpoint, params = {}) {
-    let url = `${APIConfig.apiUrl}${endpoint}?api_key=${APIConfig.apiKey}`;
+    let url = `${APIConfig.apiUrl}${endpoint}?api_key=${APIConfig.apiKey}&language=fr-FR`;
     for (const [key, value] of Object.entries(params)) {
         url += `&${key}=${value}`;
     }
