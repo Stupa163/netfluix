@@ -17,6 +17,7 @@ export default {
   async mounted(){
     let session_id = await this.getSessionID(this.$route.query.request_token)
     let user_info = await this.getUserAccount(session_id)
+    
     this.$router.push({name: 'Home'})
   }
 };

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import APIConfig from '../config/api.config'
+import router from '../router/index'
 
 Vue.use(Vuex)
 
@@ -31,6 +32,9 @@ export default new Vuex.Store({
     },
     getAvatarURL(state) {
       return state.user.avatar_url
+    },
+    getSessionID(state) {
+      return state.user.session_id
     }
   },
   actions: {
@@ -48,7 +52,7 @@ export default new Vuex.Store({
       let request_token = await dispatch('getRequestToken')
 
       //Redirection vers le lien d'autorisation TMDB
-      console.log(`https://www.themoviedb.org/authenticate/${request_token.request_token}?redirect_to=http://localhost:8080/login`)
+      //console.log(`https://www.themoviedb.org/authenticate/${request_token.request_token}?redirect_to=http://localhost:8080/login`)
       window.location.href = `https://www.themoviedb.org/authenticate/${request_token.request_token}?redirect_to=http://localhost:8080/login`
     },
 
@@ -56,7 +60,7 @@ export default new Vuex.Store({
 
       //Récupération de la session_id
       return fetch(`${APIConfig.apiUrl}/authentication/session/new?api_key=${APIConfig.apiKey}&request_token=${request_token}`, { method: 'POST' })
-        .then((responce) => responce.json())
+        .then((response) => response.json())
         .then((json) => {
 
           console.log('✔️ Session ID obtenue !')
@@ -76,18 +80,44 @@ export default new Vuex.Store({
 
       //Récupération infos user
       return fetch(`${APIConfig.apiUrl}/account?api_key=${APIConfig.apiKey}&session_id=${session_id}`)
-        .then((responce) => responce.json())
+        .then((response) => response.json())
         .then((json) => {
           console.log('✔️ Infos utilisateur obtenue !')
           console.log(json)
 
           //Mise à jour objet user
           context.commit('setUser', json)
-          
+
           //Return de l'objet 'user'
           return json
         })
         .catch((err) => console.error(err))
+    },
+
+    async getLogout(context, session_id) {
+      //Déconnexion de l'utilisateur de l'API de TMDB
+      
+      let options = {
+        method: 'DELETE',
+        body: JSON.stringify({"session_id": session_id}),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+
+      return fetch(`${APIConfig.apiUrl}/authentication/session?api_key=${APIConfig.apiKey}`,options)
+        .then(response => response.json())
+        .then(json => {
+          console.log('✔️ Utilisateur déconnecté !')
+          console.log(json)
+
+          //Supprimé du localstorage
+          localStorage.removeItem('session_id')
+
+          //Redirection de l'utilisateur vers la page home
+          window.location.reload()
+        })
+        .catch(err => console.error(err))
     }
   }
 })
