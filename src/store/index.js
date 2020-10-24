@@ -53,7 +53,7 @@ export default new Vuex.Store({
       let request_token = await dispatch('getRequestToken')
 
       //Redirection vers le lien d'autorisation TMDB
-      window.location.href = `https://www.themoviedb.org/authenticate/${request_token.request_token}?redirect_to=${window.location.origin + router.resolve({name: 'Login'}).href}`
+      window.location.href = `${APIConfig.apiAuthentificationUrl}${request_token.request_token}?redirect_to=${window.location.origin + router.resolve({name: 'Login'}).href}`
     },
 
     async getSessionID(context, request_token) {

@@ -1,6 +1,5 @@
 <template>
     <div>
-        <Header/>
         <div class="home">
             <div class="text">
                 <div class="text_1">
