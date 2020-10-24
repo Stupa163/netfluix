@@ -4,34 +4,32 @@
       toggleable="lg"
       type="dark"
       fixed="top"
-      style="
-        background-image: linear-gradient(
-          0deg,
-          rgba(255, 255, 255, 0) 0%,
-          rgba(0, 0, 0, 1) 100%
-        );
-      "
+      style="background-image: linear-gradient(0deg,rgba(255, 255, 255, 0) 0%,rgba(0, 0, 0, 1) 100%);"
     >
-      <b-navbar-brand href="#">
-        <img src="../assets/logo.png" alt="logo" width="160vh" />
+      <b-navbar-brand>
+        <router-link :to="{'name': 'Home'}">
+          <img src="../assets/logo.png" alt="logo" width="160vh" />
+        </router-link>
       </b-navbar-brand>
-      <span class="text-light">{{getUsername}}</span>
+
+      <b-navbar-nav v-if="isLogged">
+        <b-nav-item :class="{'pr-3': true,'h5': true, 'active': this.$route.name === 'Latest' ? true : false}" :to="{'name': 'Latest'}">Nouveautées</b-nav-item>
+      </b-navbar-nav>
 
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
         <!-- Si pas connecté -->
         <b-button
           v-if="!isLogged"
-          variant="danger"
           size="md"
-          class="my-2 my-sm-0"
+          class="my-2 my-sm-0 bg-darkslateblue no-border"
           @click="login"
-          >S'indentifier via TMDB</b-button
-        >
+          >S'indentifier via TMDB</b-button>
 
         <!-- Sinon affichage du profil utilisateur -->
-        <b-dropdown
-          v-else
+        <div v-else>
+          <b-nav-text class="text-light">{{getUsername}}</b-nav-text>
+          <b-dropdown
           right
           size="lg"
           variant="link"
@@ -59,10 +57,13 @@
               />
             </svg>
           </template>
-          <b-dropdown-item @click="logout(getSessionID)">Se déconnecter</b-dropdown-item>
+          <b-dropdown-item @click="logout(getSessionID)"><span class="font-weight-bold">Se déconnecter</span></b-dropdown-item>
         </b-dropdown>
+        </div>
 
       </b-navbar-nav>
+      <!-- ./right-nav-items -->
+
     </b-navbar>
   </div>
 </template>
@@ -77,7 +78,7 @@ export default {
   methods: {
     ...mapActions({
       login: "getAuthorization",
-      logout: "getLogout"
+      logout: "getLogout",
     }),
   },
   computed: {
@@ -86,8 +87,30 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
-.navbar-default {
-  background-color: transparent;
+<style lang="scss">
+.bg-darkslateblue {
+  background-color: darkslateblue;
+  &:hover {
+    background-color: rgb(42, 33, 100);
+  }
+}
+.no-border {
+  border: none;
+}
+
+ul.dropdown-menu{
+  opacity: 0.80 !important;
+  background-color: rgb(22, 22, 22) !important;
+  border-radius: 2px !important;
+  border: 1px solid rgb(65, 65, 65) !important;
+}
+
+.dropdown-menu>li>a{
+  color: white !important;
+    &:hover{
+      transition: background-color 0.3s ease-in-out;
+      background-color: rgb(51, 51, 51);
+      color: white !important;
+    }
 }
 </style>
