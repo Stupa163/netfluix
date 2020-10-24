@@ -6,7 +6,8 @@ const ENDPOINTS = {
     BEST: '/movie/top_rated',
     UPCOMING: '/movie/upcoming',
     PLAYING_NOW: '/movie/now_playing',
-    DETAILS: '/movie'
+    DETAILS: '/movie',
+    SEARCH: '/search/movie'
 };
 
 export default {
@@ -33,6 +34,10 @@ export default {
         },
         getMovieDetails: async (id) => {
             let res = await executeRequest(`${ENDPOINTS.DETAILS}/${id}`)
+            return await res.json();
+        },
+        searchMovies: async (search) => {
+            let res = await executeRequest(ENDPOINTS.SEARCH, {query: encodeURI(search)});
             return await res.json();
         }
     }
