@@ -52,8 +52,7 @@ export default new Vuex.Store({
       let request_token = await dispatch('getRequestToken')
 
       //Redirection vers le lien d'autorisation TMDB
-      //console.log(`https://www.themoviedb.org/authenticate/${request_token.request_token}?redirect_to=http://localhost:8080/login`)
-      window.location.href = `https://www.themoviedb.org/authenticate/${request_token.request_token}?redirect_to=http://localhost:8080/login`
+      window.location.href = `https://www.themoviedb.org/authenticate/${request_token.request_token}?redirect_to=${router.push({ 'name': 'Home' })}`
     },
 
     async getSessionID(context, request_token) {
@@ -61,7 +60,7 @@ export default new Vuex.Store({
       //Récupération de la session_id
       return fetch(`${APIConfig.apiUrl}/authentication/session/new?api_key=${APIConfig.apiKey}&request_token=${request_token}`, { method: 'POST' })
         .then((response) => response.json())
-        .then((json) => {
+          .then((json) => {
 
           console.log('✔️ Session ID obtenue !')
 
@@ -81,7 +80,7 @@ export default new Vuex.Store({
       //Récupération infos user
       return fetch(`${APIConfig.apiUrl}/account?api_key=${APIConfig.apiKey}&session_id=${session_id}`)
         .then((response) => response.json())
-        .then((json) => {
+          .then((json) => {
           console.log('✔️ Infos utilisateur obtenue !')
           console.log(json)
 
@@ -96,18 +95,18 @@ export default new Vuex.Store({
 
     async getLogout(context, session_id) {
       //Déconnexion de l'utilisateur de l'API de TMDB
-      
+
       let options = {
         method: 'DELETE',
-        body: JSON.stringify({"session_id": session_id}),
+        body: JSON.stringify({ "session_id": session_id }),
         headers: {
           'Content-Type': 'application/json'
         }
       }
 
-      return fetch(`${APIConfig.apiUrl}/authentication/session?api_key=${APIConfig.apiKey}`,options)
+      return fetch(`${APIConfig.apiUrl}/authentication/session?api_key=${APIConfig.apiKey}`, options)
         .then(response => response.json())
-        .then(json => {
+          .then(json => {
           console.log('✔️ Utilisateur déconnecté !')
           console.log(json)
 
