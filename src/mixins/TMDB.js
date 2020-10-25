@@ -36,8 +36,8 @@ export default {
             let res = await executeRequest(`${ENDPOINTS.DETAILS}/${id}`)
             return await res.json();
         },
-        searchMovies: async (search) => {
-            let res = await executeRequest(ENDPOINTS.SEARCH, {query: encodeURI(search)});
+        searchMovies: async (search, page = 1) => {
+            let res = await executeRequest(ENDPOINTS.SEARCH, {query: encodeURI(search), page});
             return await res.json();
         }
     }
