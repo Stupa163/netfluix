@@ -8,7 +8,7 @@
         </div>
         <b-container>
             <b-row>
-                <b-col v-if="movie.poster_path" col lg="3" v-for="movie in movies">
+                <b-col v-if="movie.poster_path" col lg="3" v-for="movie in movies" :key="movie.id">
                     <Movie :id="movie.id" :poster_path="movie.poster_path"/>
                 </b-col>
             </b-row>
