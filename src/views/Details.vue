@@ -2,20 +2,19 @@
     <div v-if="movie" class="details">
         <div class="back">
             <router-link :to="{name: 'Latest'}">
-               < Retour à la liste
+                < Retour à la liste
             </router-link>
         </div>
         <b-container class="content">
             <b-row class="title">
-                <b-col><h1>{{movie.title}}</h1>
-                    <h2>({{movie.original_title}})</h2></b-col>
+                <b-col col lg="12">
+                    <h1>{{movie.title}}</h1>
+                    <h2>({{movie.original_title}})</h2>
+                </b-col>
             </b-row>
             <b-row>
-                <b-col col lg="4">
-                    <Carousel :images="[
-                        `https://image.tmdb.org/t/p/w370_and_h556_bestv2/${movie.poster_path}`,
-                        `https://image.tmdb.org/t/p/w370_and_h556_bestv2/${movie.backdrop_path}`
-                    ]"/>
+                <b-col col lg="2" offset="1">
+                    <Carousel :images="images"/>
                 </b-col>
                 <b-col col lg="7" offset="1">
                     <b-container class="infos">
@@ -28,6 +27,14 @@
                 </b-col>
             </b-row>
         </b-container>
+
+        <div class="recommendations_container text-center">
+            <h1>Vous pourriez aussi aimer</h1>
+            <Recommendations :recommendations="recommendations" v-if="recommendations.length !== 0"/>
+            <div v-else class="text-center no_recommendations">
+                <h1>Aucun film similaire trouvé</h1>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -39,19 +46,44 @@
     import ProducedBy from "../components/Details/ProducedBy";
     import Genres from "../components/Details/Genres";
     import ReleaseDate from "../components/Details/ReleaseDate";
+    import Recommendations from "../components/Details/Recommendations";
+    import APIConfig from '../config/api.config'
 
     export default {
         name: "Details",
-        components: {Carousel, Overview, Rating, ProducedBy, Genres, ReleaseDate},
+        components: {Recommendations, Carousel, Overview, Rating, ProducedBy, Genres, ReleaseDate},
         mixins: [TMDB],
         data: function () {
             return {
-                movie: null
+                movie: null,
+                recommendations: [],
+                images: []
+            }
+        },
+        methods: {
+            async getMovieAndRecommendations() {
+                this.images = [];
+                this.movie = await this.getMovieDetails(this.$route.params.id);
+                this.getImages();
+                let recommendations = await this.getRecommendations(this.$route.params.id);
+                this.recommendations = recommendations.results;
+            },
+            getImages() {
+                (this.movie.poster_path) ? this.images.push(`https://image.tmdb.org/t/p/w370_and_h556_bestv2/${this.movie.poster_path}`) : null;
+                (this.movie.backdrop_path) ? this.images.push(`https://image.tmdb.org/t/p/w370_and_h556_bestv2/${this.movie.backdrop_path}`) : null;
+                (this.images.length === 0) ? this.images = [APIConfig.defaultPosterImage] : null;
+            }
+        },
+        watch: {
+            '$route': {
+                deep: true,
+                handler: function () {
+                    this.getMovieAndRecommendations()
+                }
             }
         },
         async mounted() {
-            this.movie = await this.getMovieDetails(this.$route.params.id);
-            console.log(this.movie)
+            this.getMovieAndRecommendations()
         }
     }
 </script>
@@ -59,18 +91,28 @@
 <style scoped lang="scss">
     .details {
         padding-top: 150px;
-        height: 100vh;
-        width: 100vw;
+        width: calc(100vw - 15px);
         overflow: hidden;
         background-color: #141414;
         color: white;
 
+        .recommendations {
+            padding-right: 50px;
+        }
+
         .back {
             padding-left: 75px;
+
             a {
                 color: white;
                 text-decoration: underline;
             }
+        }
+
+        .container {
+            margin: 0;
+            width: 100%;
+            max-width: 100%;
         }
 
         .title {
@@ -88,6 +130,18 @@
 
             & > * {
                 padding-top: 20px;
+            }
+        }
+
+        .recommendations_container {
+            padding-top: 100px;
+
+            h1 {
+                padding-bottom: 50px;
+            }
+
+            .no_recommendations {
+                padding-top: 50px;
             }
         }
     }
