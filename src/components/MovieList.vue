@@ -8,8 +8,13 @@
         </div>
         <b-container>
             <b-row>
-                <b-col v-if="movie.poster_path" col lg="3" v-for="movie in movies" :key="movie.id">
-                    <Movie :id="movie.id" :poster_path="movie.poster_path"/>
+                <b-col col lg="3" v-for="movie in movies" :key="movie.id">
+                    <Movie v-if="movie.poster_path" :id="movie.id"
+                           :poster_path="`https://image.tmdb.org/t/p/w370_and_h556_bestv2/${movie.poster_path}`"/>
+                    <div v-else class="movie_with_title text-center">
+                        <Movie :id="movie.id" :poster_path="defaultImage"/>
+                        <h3>{{movie.title}}</h3>
+                    </div>
                 </b-col>
             </b-row>
         </b-container>
@@ -18,10 +23,16 @@
 
 <script>
     import Movie from "./Movie";
+    import APIConfig from "../config/api.config";
 
     export default {
         name: "MovieList",
         components: {Movie},
+        data: () => {
+            return {
+                defaultImage: APIConfig.defaultPosterImage
+            }
+        },
         props: {
             movies: {
                 type: Array,
@@ -58,6 +69,10 @@
                 padding-bottom: 50px;
                 padding-left: 0;
                 padding-right: 0;
+
+                .movie_with_title {
+                    color: white;
+                }
             }
         }
     }

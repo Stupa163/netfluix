@@ -2,7 +2,7 @@
     <div class="movie">
         <div class="image">
             <router-link :to="{name: 'Details', params: {id: id}}">
-                <img :src="'https://image.tmdb.org/t/p/w370_and_h556_bestv2/' + poster_path" alt="">
+                <img :src="poster_path" alt="">
             </router-link>
         </div>
     </div>
@@ -35,6 +35,7 @@
                 margin: auto;
                 display: block;
                 width: 90%;
+                height: 556px;
                 transition: transform .2s;
 
                 &:hover {
