@@ -7,7 +7,8 @@ const ENDPOINTS = {
     UPCOMING: '/movie/upcoming',
     PLAYING_NOW: '/movie/now_playing',
     DETAILS: '/movie',
-    SEARCH: '/search/movie'
+    SEARCH: '/search/movie',
+    RECOMMENDATIONS: '/movie/id/recommendations'
 };
 
 export default {
@@ -38,6 +39,10 @@ export default {
         },
         searchMovies: async (search, page = 1) => {
             let res = await executeRequest(ENDPOINTS.SEARCH, {query: encodeURI(search), page});
+            return await res.json();
+        },
+        getRecommendations: async (id) => {
+            let res = await executeRequest(ENDPOINTS.RECOMMENDATIONS.replace('id', id))
             return await res.json();
         }
     }
