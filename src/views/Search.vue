@@ -44,7 +44,9 @@
                 window.onscroll = async () => {
                     if (this.isScrolledToBottom()) {
                         this.page++;
-                        let res = await this.searchMovies(this.query, this.page);
+                        let res = (this.query === '')
+                            ? await this.getPlayingNowMovies(this.page)
+                            : await this.searchMovies(this.query, this.page);
                         this.movies = this.movies.concat(res.results);
                     }
                 }
