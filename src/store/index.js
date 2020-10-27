@@ -9,6 +9,7 @@ export default new Vuex.Store({
   state: {
     user: {
       session_id: localStorage.getItem('session_id') || null,
+      account_id: null,
       username: "",
       avatar_url: ""
     }
@@ -21,6 +22,7 @@ export default new Vuex.Store({
     setUser(state, user) {
       state.user.username = user.username
       state.user.avatar_url = user.avatar.gravatar.hash
+      state.user.account_id = user.id
     }
   },
   getters: {
@@ -35,6 +37,9 @@ export default new Vuex.Store({
     },
     getSessionID(state) {
       return state.user.session_id
+    },
+    getAccountID(state) {
+      return state.user.account_id
     }
   },
   actions: {
