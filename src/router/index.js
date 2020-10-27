@@ -1,11 +1,15 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import store from '../store/index';
+
+/*             VUE               */
 import Home from '../views/Home.vue'
 import Login from "../views/Login";
 import Latest from "../views/Latest";
 import Details from "../views/Details";
 import Search from "../views/Search";
-import store from '../store/index';
+import Watchlist from '../views/Watchlist';
+
 
 Vue.use(VueRouter);
 
@@ -40,6 +44,14 @@ const routes = [
         path: '/search',
         name: 'Search',
         component: Search,
+        meta: {
+            requiredAuth: true
+        }
+    },
+    {
+        path: '/watchlist',
+        name: 'Watchlist',
+        component: Watchlist,
         meta: {
             requiredAuth: true
         }
