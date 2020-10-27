@@ -1,8 +1,13 @@
 <template>
-  <b-container fluid class="watchlist"> 
+  <b-container fluid class="watchlist">
+    <!-- <b-row>
+      <b-col>
+        <b-alert dismissible show variant="danger">Danger Alert</b-alert>
+      </b-col>
+    </b-row> -->
     <b-row>
       <b-col>
-        <h1>Mes séries...</h1>
+        <h1 class="text-light" style="margin-left: 10vh">Mes séries...</h1>
       </b-col>
     </b-row>
     <b-row>
@@ -45,7 +50,7 @@ export default {
 
 <style lang="scss" scoped>
 .watchlist {
-  padding-top: 10vh;
+  padding-top: 15vh;
   
   &.container-fluid {
     background-color: #141414;
