@@ -14,6 +14,8 @@
 
       <b-navbar-nav v-if="isLogged">
         <b-nav-item :class="{'pr-3': true,'h5': true, 'active': this.$route.name === 'Latest' ? true : false}" :to="{'name': 'Latest'}">Nouveautées</b-nav-item>
+        <b-nav-item :class="{'pr-3': true,'h5': true, 'active': this.$route.name === 'Watchlist' ? true : false}" :to="{'name': 'Watchlist'}">Mes séries suivie</b-nav-item>
+        <b-nav-item :class="{'pr-3': true,'h5': true, 'active': this.$route.name === 'Search' ? true : false}" :to="{'name': 'Search'}">Rechercher un film</b-nav-item>
       </b-navbar-nav>
 
       <!-- Right aligned nav items -->
