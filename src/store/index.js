@@ -125,18 +125,6 @@ export default new Vuex.Store({
           window.location.reload()
         })
         .catch(err => console.error(err))
-    },
-
-    async getWatchlistMovie(context, data){
-
-      return fetch(`${APIConfig.apiUrl}/account/${data.account_id}/watchlist/movies?api_key=${APIConfig.apiKey}&language=fr-FR&session_id=${data.session_id}`)
-        .then(response => response.json())
-          .then(json => {
-            console.log('✔️ Watchlist obtenue !')
-            console.log(json)
-            return json
-          })
-          .catch(err => console.error(err))
     }
   }
 })
