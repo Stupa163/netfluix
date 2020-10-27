@@ -8,7 +8,6 @@
     <b-row>
       <b-col>
         <h1 class="text-light" style="margin-left: 10vh">Mes séries...</h1>
-        <b-button variant="danger" @click="addMovieWatchlist({account_id: getAccountID,session_id: getSessionID, media_id: 13})">Test</b-button>
       </b-col>
     </b-row>
     <b-row>
