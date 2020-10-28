@@ -20,6 +20,7 @@
 
 <script>
 import { mapGetters,mapActions } from "vuex";
+import MixinsWatchlist from "../mixins/MixinsWatchlist"
 import MovieList from "../components/MovieList";
 import APIConfig from "../config/api.config";
 
@@ -31,22 +32,19 @@ export default {
     };
   },
   components: { MovieList },
-  methods: {
-    ...mapActions([
-      "addMovieWatchlist",
-      "getWatchlistMovie"
-    ])
-  },
+  mixins: [MixinsWatchlist],
   computed: {
     ...mapGetters(["getAccountID", "getSessionID"]),
   },
 
   async mounted() {
-    this.getWatchlistMovie({'account_id': this.getAccountID, 'session_id': this.getSessionID}).then(
-      (res) => (this.watchlist = res.results)
-    );
-  },
-};
+    this.getWatchlistMovie(this.getAccountID,this.getSessionID)
+      .then(response => {
+        this.watchlist = response
+      })
+      .catch(err => console.error(err))
+  }
+}
 </script>
 
 <style lang="scss" scoped>

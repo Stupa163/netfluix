@@ -21,7 +21,10 @@
             <ProducedBy :companies="movie.production_companies" />
             <Rating :note="movie.vote_average" />
             <b-button-group>
-              <b-button size="sm" class="rounded-circle" v-b-tooltip.hover.bottom="'Ajouter à la liste de suivie'" variant="outline-secondary"><b-icon-bookmark/></b-button>
+              <b-button @click="!isPresentInWatchlist ? add(getAccountID, getSessionID, $route.params.id) : remove(getAccountID, getSessionID, $route.params.id)" size="sm" class="rounded-circle" v-b-tooltip.hover.bottom="`${!isPresentInWatchlist ? 'Ajouter' : 'Retirer'} à la liste de suivie`" variant="outline-secondary">
+                <b-icon-bookmark v-if="!isPresentInWatchlist"/>
+                <b-icon-bookmark-check v-else/>
+              </b-button>
             </b-button-group>
             <Overview :overview="movie.overview" />
           </b-container>
@@ -44,6 +47,7 @@
 
 <script>
 import TMDB from "../mixins/TMDB";
+import MixinsWatchlist from "../mixins/MixinsWatchlist"
 import Carousel from "../components/Details/Carousel";
 import Overview from "../components/Details/Overview";
 import Rating from "../components/Details/Rating";
@@ -52,11 +56,19 @@ import Genres from "../components/Details/Genres";
 import ReleaseDate from "../components/Details/ReleaseDate";
 import Recommendations from "../components/Details/Recommendations";
 import APIConfig from "../config/api.config";
-import { BootstrapVue, BIconBookmark, BIconBookmarkCheck} from 'bootstrap-vue'
+import { BIconBookmark, BIconBookmarkCheck} from 'bootstrap-vue'
 import { mapGetters } from 'vuex'
 
 export default {
   name: "Details",
+  data: function () {
+    return {
+      movie: null,
+      recommendations: [],
+      images: [],
+      isPresentInWatchlist: false
+    };
+  },
   components: {
     Recommendations,
     Carousel,
@@ -68,14 +80,7 @@ export default {
     BIconBookmark,
     BIconBookmarkCheck
   },
-  mixins: [TMDB],
-  data: function () {
-    return {
-      movie: null,
-      recommendations: [],
-      images: [],
-    };
-  },
+  mixins: [TMDB,MixinsWatchlist],
   methods: {
     async getMovieAndRecommendations() {
       this.images = [];
@@ -86,6 +91,7 @@ export default {
       );
       this.recommendations = recommendations.results;
     },
+
     getImages() {
       this.movie.poster_path
         ? this.images.push(
@@ -101,15 +107,25 @@ export default {
         ? (this.images = [APIConfig.defaultPosterImage])
         : null;
     },
-    async isMovieWatchlist(account_id,session_id,movie_id){
-        return fetch(`${APIConfig.apiUrl}/account/${account_id}/watchlist/movies?api_key=${APIConfig.apiKey}&session_id=${session_id}`)
-            .then(response => response.json())
-                .then(json => {
-                    let res = json.results.filter(id_exist => {
-                        return id_exist.id
-                    })
-                    console.log(res)
-                })
+
+    async add(account_id,session_id,movie_id){
+      //Ajout du film dans la watchlist
+      this.addMovieWatchlist(account_id,session_id,movie_id)
+        .then(response => {
+          console.log(response)
+          this.isPresentInWatchlist = true
+        })
+        .catch(err => console.error(err))
+    },
+
+    async remove(account_id,session_id,movie_id){
+      //Suppression du film de la watchlist
+      this.deleteMovieWatchlist(account_id,session_id,movie_id)
+        .then(response => {
+          console.log(response)
+          this.isPresentInWatchlist = false
+        })
+        .catch(err => console.error(err))
     }
   },
   computed: {
@@ -128,8 +144,9 @@ export default {
   },
   async mounted() {
     this.getMovieAndRecommendations();
-    console.log()
-    this.isMovieWatchlist(this.getAccountID,this.getSessionID)
+
+    this.isMovieWatchlist(this.getAccountID,this.getSessionID,this.$route.params.id)
+      .then(response => this.isPresentInWatchlist = response)
   },
 };
 </script>
