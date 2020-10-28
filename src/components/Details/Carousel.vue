@@ -1,6 +1,6 @@
 <template>
     <b-carousel id="carousel-1" :interval="4000" controls>
-        <b-carousel-slide v-for="image in images" :img-src="image"/>
+        <b-carousel-slide v-for="(image, key) in images" :img-src="image" :key="key"/>
     </b-carousel>
 </template>
 
