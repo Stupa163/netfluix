@@ -8,7 +8,8 @@ const ENDPOINTS = {
     PLAYING_NOW: '/movie/now_playing',
     DETAILS: '/movie',
     SEARCH: '/search/movie',
-    RECOMMENDATIONS: '/movie/id/recommendations'
+    RECOMMENDATIONS: '/movie/id/recommendations',
+    GENRES: '/genre/movie/list'
 };
 
 export default {
@@ -34,7 +35,7 @@ export default {
             return await res.json();
         },
         getMovieDetails: async (id) => {
-            let res = await executeRequest(`${ENDPOINTS.DETAILS}/${id}`)
+            let res = await executeRequest(`${ENDPOINTS.DETAILS}/${id}`);
             return await res.json();
         },
         searchMovies: async (search, page = 1) => {
@@ -42,7 +43,11 @@ export default {
             return await res.json();
         },
         getRecommendations: async (id) => {
-            let res = await executeRequest(ENDPOINTS.RECOMMENDATIONS.replace('id', id))
+            let res = await executeRequest(ENDPOINTS.RECOMMENDATIONS.replace('id', id));
+            return await res.json();
+        },
+        getGenres: async () => {
+            let res = await executeRequest(ENDPOINTS.GENRES);
             return await res.json();
         }
     }
