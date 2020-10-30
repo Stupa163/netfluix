@@ -3,15 +3,15 @@
         <input v-model="query" type="text" @keyup="sendSearchRequest" class="search_input" placeholder="Titre du film">
         <b-container class="movie_container">
             <b-row>
-                <b-col col lg="2" class="buttons_container">
+                <b-col col cols="12" sm="2" class="d-none d-lg-block buttons_container">
                     <b-row v-for="genre in genres" :key="genre.id" class="genre">
-                        <b-col col lg="7" offset="1">{{genre.name}}</b-col>
-                        <b-col col lg="4">
+                        <b-col col lg="6" cols="12" offset-lg="1">{{genre.name}}</b-col>
+                        <b-col col lg="4" cols="12" offset-lg="1">
                             <ToggleButton v-model="genre.model"/>
                         </b-col>
                     </b-row>
                 </b-col>
-                <b-col col lg="10">
+                <b-col col lg="10" cols="12">
                     <MovieList :movies="displayedMovies" :loading="loading"/>
                 </b-col>
             </b-row>
