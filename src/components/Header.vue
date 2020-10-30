@@ -116,15 +116,9 @@ import {
   BIconChevronBarUp,
   BIconCaretDownFill,
 } from "bootstrap-vue";
-import Utils from "../mixins/Utils";
 
 export default {
   name: "Header",
-  data: function () {
-    return {
-      isMobiles: false,
-    };
-  },
   methods: {
     ...mapActions({
       login: "getAuthorization",
@@ -136,16 +130,9 @@ export default {
     BIconChevronBarUp,
     BIconCaretDownFill,
   },
-  mixins: [Utils],
   computed: {
     ...mapGetters(["getUsername", "isLogged", "getAvatarURL", "getSessionID"]),
-  },
-  watch: {
-    isMobile: () => {
-      //Check du support utilisé
-      this.isMobiles = this.isMobile();
-    },
-  },
+  }
 };
 </script>
 
