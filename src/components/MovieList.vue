@@ -8,7 +8,7 @@
         </div>
         <b-container>
             <b-row>
-                <b-col col lg="3" v-for="movie in movies" :key="movie.id">
+                <b-col col cols="12" sm="12" lg="3" v-for="movie in movies" :key="movie.id">
                     <Movie v-if="movie.poster_path" :id="movie.id"
                            :poster_path="`https://image.tmdb.org/t/p/w370_and_h556_bestv2/${movie.poster_path}`"/>
                     <div v-else class="movie_with_title text-center">
