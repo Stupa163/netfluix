@@ -1,90 +1,107 @@
 <template>
   <div>
-    <b-navbar
-      toggleable="lg"
-      type="dark"
-      fixed="top"
-      style="background-image: linear-gradient(0deg,rgba(255, 255, 255, 0) 0%,rgba(0, 0, 0, 1) 100%);"
-    >
+    <b-navbar toggleable="lg" type="dark" fixed="top" variant="fade">
+
       <!-- Logo version bureau/mobile -->
       <b-navbar-brand>
-        <router-link :to="{'name': 'Home'}">
-          <img class="disabled-logo" src="../assets/logo.png" alt="logo" width="160vh" />
-          <img class="minimize-logo" src="../assets/logo-2.png" alt="logo" width="35vh" />
+        <router-link :to="{ name: 'Home' }">
+          <img
+            class="disabled-logo"
+            src="../assets/logo.png"
+            alt="logo"
+            width="160vh"
+          />
+          <img
+            class="minimize-logo"
+            src="../assets/logo-2.png"
+            alt="logo"
+            width="35vh"
+          />
         </router-link>
       </b-navbar-brand>
       <!-- ./logo -->
 
-      <b-navbar-nav>
-        <!-- Si pas connecté affichage-->
+      <!-- Menu de navigation version bureau (version mobile, navigation dans le footer) -->
+      <b-navbar-nav v-if="isLogged" class="disabled-logo">
+        <b-nav-item
+          :class="{
+            'pr-3': true,
+            h5: true,
+            active: this.$route.name === 'Latest' ? true : false,
+          }"
+          :to="{ name: 'Latest' }"
+          >Nouveautées</b-nav-item
+        >
+        <b-nav-item
+          :class="{
+            'pr-3': true,
+            h5: true,
+            active: this.$route.name === 'Watchlist' ? true : false,
+          }"
+          :to="{ name: 'Watchlist' }"
+          >Mes séries suivie</b-nav-item
+        >
+        <b-nav-item
+          :class="{
+            'pr-3': true,
+            h5: true,
+            active: this.$route.name === 'Search' ? true : false,
+          }"
+          :to="{ name: 'Search' }"
+          >Rechercher un film</b-nav-item
+        >
+      </b-navbar-nav>
+      <!-- ./menu-de-navigation -->
+
+      <!-- Profil utilisateur -->
+      <b-navbar-nav class="ml-auto">
         <b-button
           v-if="!isLogged"
           size="md"
           class="my-2 my-sm-0 bg-darkslateblue no-border"
           @click="login"
-          >S'indentifier via TMDB</b-button>
-
-        <!-- Sinon affichage du profil utilisateur -->
-        <div v-else class="disabled-logo">
-          <b-nav-text class="text-light">{{getUsername}}</b-nav-text>
-          <b-dropdown
-          right
-          size="lg"
-          variant="link"
-          toggle-class="text-decoration-none"
-          no-caret
+          >S'indentifier via TMDB</b-button
         >
-          <template #button-content>
-            <img
-              :src="'https://www.gravatar.com/avatar/'+ getAvatarURL"
-              class="rounded"
-              width="40vh"
-              height="40vh"
-              alt=""
-            />
-            <svg
-              width="1em"
-              height="1em"
-              viewBox="0 0 16 16"
-              class="text-light pl-1 bi bi-caret-down-fill"
-              fill="currentColor"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"
+
+        <div v-else class="disabled-logo">
+          <b-nav-text class="text-light">{{ getUsername }}</b-nav-text>
+          <b-dropdown right size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
+
+            <template #button-content>
+              <img
+                :src="'https://www.gravatar.com/avatar/' + getAvatarURL"
+                class="rounded"
+                width="40vh"
+                height="40vh"
+                alt=""
               />
-            </svg>
-          </template>
-          <b-dropdown-item @click="logout(getSessionID)"><span class="font-weight-bold">Se déconnecter</span></b-dropdown-item>
-        </b-dropdown>
+              <b-icon-caret-down-fill
+                class="pl-1"
+                font-scale="1"
+                style="color: white"
+              />
+            </template>
+
+            <b-dropdown-item @click="logout(getSessionID)"><span class="font-weight-bold">Se déconnecter</span></b-dropdown-item>
+
+          </b-dropdown>
+
         </div>
       </b-navbar-nav>
+      <!-- ./profil-utilisateur -->
 
-      <!-- Bouton menu version mobile -->
       <b-navbar-toggle target="nav-collapse" class="no-border">
-         <template>
-            <img
-              :src="'https://www.gravatar.com/avatar/'+ getAvatarURL"
-              class="rounded-circle"
-              width="35vh"
-              height="35vh"
-              alt=""
-            />
-         </template>
+        <template>
+          <img
+            :src="'https://www.gravatar.com/avatar/' + getAvatarURL"
+            class="rounded-circle"
+            width="35vh"
+            height="35vh"
+            alt=""
+          />
+        </template>
       </b-navbar-toggle>
       <!-- ./bouton-menu-mobile -->
-
-      <!-- Navigation version mobile -->
-      <b-collapse id="nav-collapse" is-nav>
-        <b-navbar-nav v-if="isLogged">
-          <b-dropdown-item @click="logout(getSessionID)" class="minimize-logo"><span class="font-weight-bold">Se déconnecter</span></b-dropdown-item>
-          <b-dropdown-divider></b-dropdown-divider>
-          <b-nav-item :class="{'pr-3': true,'h5': true, 'active': this.$route.name === 'Latest' ? true : false}" :to="{'name': 'Latest'}">Nouveautées</b-nav-item>
-          <b-nav-item :class="{'pr-3': true,'h5': true, 'active': this.$route.name === 'Watchlist' ? true : false}" :to="{'name': 'Watchlist'}">Mes séries suivie</b-nav-item>
-          <b-nav-item :class="{'pr-3': true,'h5': true, 'active': this.$route.name === 'Search' ? true : false}" :to="{'name': 'Search'}">Rechercher un film</b-nav-item>
-        </b-navbar-nav>
-      </b-collapse>
-      <!-- ./navigation-mobile -->
 
     </b-navbar>
   </div>
@@ -94,7 +111,11 @@
 import { mapActions } from "vuex";
 import { mapGetters } from "vuex";
 import APIConfig from "../config/api.config";
-import { BIconChevronBarDown, BIconChevronBarUp } from "bootstrap-vue";
+import {
+  BIconChevronBarDown,
+  BIconChevronBarUp,
+  BIconCaretDownFill,
+} from "bootstrap-vue";
 import Utils from "../mixins/Utils";
 
 export default {
@@ -113,6 +134,7 @@ export default {
   components: {
     BIconChevronBarDown,
     BIconChevronBarUp,
+    BIconCaretDownFill,
   },
   mixins: [Utils],
   computed: {
@@ -122,8 +144,8 @@ export default {
     isMobile: () => {
       //Check du support utilisé
       this.isMobiles = this.isMobile();
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -138,7 +160,7 @@ export default {
   border: none;
 }
 
-/* ul.dropdown-menu {
+ul.dropdown-menu {
   opacity: 0.8 !important;
   background-color: rgb(22, 22, 22) !important;
   border-radius: 2px !important;
@@ -152,7 +174,7 @@ export default {
     background-color: rgb(51, 51, 51);
     color: white !important;
   }
-} */
+}
 
 .disabled-logo {
   @media screen and (max-width: 990px) {
