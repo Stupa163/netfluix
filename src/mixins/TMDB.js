@@ -49,7 +49,7 @@ export default {
 }
 
 async function executeRequest(endpoint, params = {}) {
-    let url = `${APIConfig.apiUrl}${endpoint}?api_key=${APIConfig.apiKey}&language=fr-FR`;
+    let url = `${APIConfig.apiUrl}${endpoint}?api_key=${APIConfig.apiKey}&language=fr-FR&include_adult=true`;
     for (const [key, value] of Object.entries(params)) {
         url += `&${key}=${value}`;
     }
