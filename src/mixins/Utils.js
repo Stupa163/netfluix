@@ -4,11 +4,6 @@ export default {
             return Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop) + window.innerHeight === document.documentElement.offsetHeight
         },
         filterMovies: (movies, genres) => {
-
-            genres.forEach((genre) => {
-                // console.log(`${genre.name} => ${genre.model}`);
-            });
-
             movies.forEach((movie) => {
                 let excludeMovie = true;
                 movie.genre_ids.forEach((id) => {

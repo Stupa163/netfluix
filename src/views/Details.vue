@@ -113,7 +113,6 @@
                 //Ajout du film dans la watchlist
                 this.addMovieWatchlist(account_id, session_id, movie_id)
                     .then(response => {
-                        console.log(response)
                         this.isPresentInWatchlist = true
                     })
                     .catch(err => console.error(err))
@@ -123,7 +122,6 @@
                 //Suppression du film de la watchlist
                 this.deleteMovieWatchlist(account_id, session_id, movie_id)
                     .then(response => {
-                        console.log(response)
                         this.isPresentInWatchlist = false
                     })
                     .catch(err => console.error(err))
@@ -163,15 +161,6 @@
 
         .recommendations {
             padding-right: 50px;
-        }
-
-        .back {
-            padding-left: 75px;
-
-            a {
-                color: white;
-                text-decoration: underline;
-            }
         }
 
         .container {

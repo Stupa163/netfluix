@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import APIConfig from '../config/api.config'
 import router from '../router/index'
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
