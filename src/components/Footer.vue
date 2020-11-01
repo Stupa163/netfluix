@@ -54,6 +54,7 @@ export default {
 <style lang="scss">
 footer {
   position: fixed;
+  z-index: 9999;
   bottom: 0;
   width: 100%;
   /* Set the fixed height of the footer here */

@@ -90,7 +90,8 @@
                     </b-col>
 
                     <b-col md=6>
-                        <b-img style="z-index: 2;" src="../assets/tv.png" alt="Test" fluid-grow center></b-img>
+                        <video class="video-tv" src="https://assets.nflxext.com/ffe/siteui/acquisition/ourStory/fuji/desktop/video-tv-0819.m4v" muted loop autoplay></video>
+                        <b-img style="position: absolute; top: -1%; z-index: 2;" src="../assets/tv.png" alt="Test" fluid-grow center></b-img>
                     </b-col>
             </b-row>
 
@@ -121,7 +122,8 @@
                     </b-col>
 
                     <b-col md=6>
-                        <b-img src="../assets/device-pile.png" alt="Test" fluid center></b-img>
+                        <video class="video-mac" src="https://assets.nflxext.com/ffe/siteui/acquisition/ourStory/fuji/desktop/video-devices.m4v" muted loop autoplay></video>
+                        <b-img style="position: absolute; top: -10%; left: 15%; z-index: 1; width: 70%" src="../assets/device-pile.png" alt="Test" fluid center></b-img>
                     </b-col>
             </b-row>
 
@@ -236,9 +238,16 @@ export default {
 }
 
 .video-tv {
-    position: relative;
-    z-index: 1;
-    top: -370px;
-    left: 10px
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}
+
+.video-mac {
+  position: relative;
+  z-index: 1;
+  width: 70%;
+  left: 15%;
+  height: 100%;
 }
 </style>
