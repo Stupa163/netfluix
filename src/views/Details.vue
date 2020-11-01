@@ -138,7 +138,7 @@
                 deep: true,
                 handler: function () {
                     this.getMovieAndRecommendations();
-                    window.scrollTo(0,0);
+                    window.scrollTo(0, 0);
                 },
             },
         },
@@ -158,6 +158,10 @@
         overflow: hidden;
         background-color: #141414;
         color: white;
+
+        @media screen and (max-width: 1024px) {
+            width: 100vw;
+        }
 
         .recommendations {
             padding-right: 50px;
