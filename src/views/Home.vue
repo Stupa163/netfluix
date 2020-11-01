@@ -1,253 +1,111 @@
 <template>
-<!--     <div>
+    <b-container fluid>
 
-        <div class="home">
-            <div class="text">
-                <div class="text_1">
-                    <h1>Films, séries TV et bien plus en illimité</h1>
-                </div>
-                <div class="text_2">
-                    <h2>Où que vous soyez. Annulez à tout moment.</h2>
-                </div>
-                <div class="text_3">
-                    <h4>Prêt à regarder Netflix ? Saisissez votre adresse e-mail pour vous abonner ou réactiver votre
-                        abonnement.</h4>
-                </div>
-                <div class="form">
-                    <input type="text" placeholder="Adresse e-mail  ">
-                    <button class="btn btn-danger">Essayez gratuitement pendant 30 jours</button>
-                </div>
+        <!-- SECTION 1 -->
+        <b-row class="p-5 titre" style="height: 65vh;">
+            <div class="text-center text-light w-100">
+                <p class="h1 font-weight-bold" style="font-size: 5vh; padding-top: 10%">
+                    Films, séries TV et bien plus en illimité.
+                </p>
+                <p class="" style="font-size: 3vh">
+                    Où que vous soyez. Annulez à tout moment.
+                </p>
+                <p>
+                    Prêt à regarder Netflix ? Saisissez votre adresse e-mail pour vous abonner ou réactiver votre
+                    abonnement.
+                </p>
             </div>
-        </div>
-        <div class="section_1">
-            <b-container class="container">
-                <b-row>
-                    <b-col col lg="6" class="text_left">
-                        <h1>Regardez Netflix sur votre TV.</h1>
-                        <h2>Regardez Netflix sur votre Smart TV, PlayStation, Xbox, Chromecast, Apple TV, lecteurs
-                            Blu-ray et bien plus.</h2>
-                    </b-col>
-                    <b-col col lg="6" class="image_right">
-                        <VideoPlayerTV/>
-                    </b-col>
-                </b-row>
-            </b-container>
-        </div>
-        <div class="section_2">
-            <b-container class="container">
-                <b-row>
-                    <b-col col lg="6" class="image_right">
-                        <img src="../assets/image_section_2.png" alt="">
-                    </b-col>
-                    <b-col col lg="6" class="text_left">
-                        <h1>Téléchargez vos séries préférées pour les regarder hors connexion.</h1>
-                        <h2>Enregistrez vos programmes préférés et ayez toujours quelque chose à regarder.</h2>
-                    </b-col>
-                </b-row>
-            </b-container>
-        </div>
-        <div class="section_3">
-            <b-container class="container">
-                <b-row>
-                    <b-col col lg="6" class="text_left">
-                        <h1>Où que vous soyez.</h1>
-                        <h2>Regardez des films et séries TV en accès illimité sur votre TV, smartphone, tablette et
-                            ordinateur, tout compris.</h2>
-                    </b-col>
-                    <b-col col lg="6" class="image_right">
-                        <VideoPlayerMac/>
-                    </b-col>
-                </b-row>
-            </b-container>
-        </div> -->
-        <b-container fluid>
+        </b-row>
 
-            <!-- SECTION 1 -->
-            <b-row class="p-5 titre" style="height: 65vh;">
-                <div class="text-center text-light w-100">
-                    <p class="h1 font-weight-bold" style="font-size: 5vh; padding-top: 10%">
-                        Films, séries TV et bien plus en illimité.
-                    </p>
-                    <p class="" style="font-size: 3vh">
-                        Où que vous soyez. Annulez à tout moment.
-                    </p>
-                    <p>
-                        Prêt à regarder Netflix ? Saisissez votre adresse e-mail pour vous abonner ou réactiver votre abonnement.
-                    </p>
-                </div>
-            </b-row>
+        <!-- SECTION 2 -->
+        <b-row style="border-top: 7px solid gray; border-bottom: 3.5px solid gray; background-color: black; padding: 70px 45px;"
+               align-v="center">
 
-            <!-- SECTION 2 -->
-            <b-row style="border-top: 7px solid gray; border-bottom: 3.5px solid gray; background-color: black; padding: 70px 45px;" align-v="center">
+            <b-col md=6>
+                <p class="h1 text-center text-light font-weight-bold">
+                    Regardez Netflix sur votre TV.
+                </p>
+                <p class="text-center text-light">
+                    Regardez Netflix sur votre Smart TV, PlayStation, Xbox, Chromecast, Apple TV, lecteurs Blu-ray et
+                    bien plus.
+                </p>
+            </b-col>
 
-                    <b-col md=6>
-                        <p class="h1 text-center text-light font-weight-bold">
-                            Regardez Netflix sur votre TV.
-                        </p>
-                        <p class="text-center text-light">
-                            Regardez Netflix sur votre Smart TV, PlayStation, Xbox, Chromecast, Apple TV, lecteurs Blu-ray et bien plus.
-                        </p>
-                    </b-col>
+            <b-col md=6>
+                <video class="video-tv"
+                       src="https://assets.nflxext.com/ffe/siteui/acquisition/ourStory/fuji/desktop/video-tv-0819.m4v"
+                       muted loop autoplay/>
+                <b-img style="position: absolute; top: -1%; z-index: 2;" src="../assets/tv.png" alt="Test" fluid-grow
+                       center/>
+            </b-col>
+        </b-row>
 
-                    <b-col md=6>
-                        <video class="video-tv" src="https://assets.nflxext.com/ffe/siteui/acquisition/ourStory/fuji/desktop/video-tv-0819.m4v" muted loop autoplay></video>
-                        <b-img style="position: absolute; top: -1%; z-index: 2;" src="../assets/tv.png" alt="Test" fluid-grow center></b-img>
-                    </b-col>
-            </b-row>
+        <b-row style="border-top: 3.5px solid gray; border-bottom: 3.5px solid gray; background-color: black; padding: 70px 45px;"
+               align-v="center">
+            <b-col md=6>
+                <b-img src="../assets/image_section_2.png" alt="Test" fluid center/>
+            </b-col>
 
-            <b-row style="border-top: 3.5px solid gray; border-bottom: 3.5px solid gray; background-color: black; padding: 70px 45px;" align-v="center">
-                    <b-col md=6>
-                        <b-img src="../assets/image_section_2.png" alt="Test" fluid center></b-img>
-                    </b-col>
+            <b-col md=6>
+                <p class="h1 text-center text-light font-weight-bold">
+                    Regardez Netflix sur votre TV.
+                </p>
+                <p class="text-center text-light">
+                    Regardez Netflix sur votre Smart TV, PlayStation, Xbox, Chromecast, Apple TV, lecteurs Blu-ray et
+                    bien plus.
+                </p>
+            </b-col>
+        </b-row>
 
-                    <b-col md=6>
-                        <p class="h1 text-center text-light font-weight-bold">
-                            Regardez Netflix sur votre TV.
-                        </p>
-                        <p class="text-center text-light">
-                            Regardez Netflix sur votre Smart TV, PlayStation, Xbox, Chromecast, Apple TV, lecteurs Blu-ray et bien plus.
-                        </p>
-                    </b-col>
-            </b-row>
+        <b-row style="border-top: 3.5px solid gray; background-color: black; padding: 70px 45px;" align-v="center">
 
-            <b-row style="border-top: 3.5px solid gray; background-color: black; padding: 70px 45px;" align-v="center">
+            <b-col md=6>
+                <p class="h1 text-center text-light font-weight-bold">
+                    Où que vous soyez.
+                </p>
+                <p class="text-center text-light">
+                    Regardez des films et séries TV en accès illimité sur votre TV, smartphone, tablette et ordinateur,
+                    tout compris.
+                </p>
+            </b-col>
 
-                    <b-col md=6>
-                        <p class="h1 text-center text-light font-weight-bold">
-                            Où que vous soyez.
-                        </p>
-                        <p class="text-center text-light">
-                            Regardez des films et séries TV en accès illimité sur votre TV, smartphone, tablette et ordinateur, tout compris.
-                        </p>
-                    </b-col>
+            <b-col md=6>
+                <video class="video-mac"
+                       src="https://assets.nflxext.com/ffe/siteui/acquisition/ourStory/fuji/desktop/video-devices.m4v"
+                       muted loop autoplay/>
+                <b-img style="position: absolute; top: -10%; left: 15%; z-index: 1; width: 70%"
+                       src="../assets/device-pile.png" alt="Test" fluid center/>
+            </b-col>
+        </b-row>
 
-                    <b-col md=6>
-                        <video class="video-mac" src="https://assets.nflxext.com/ffe/siteui/acquisition/ourStory/fuji/desktop/video-devices.m4v" muted loop autoplay></video>
-                        <b-img style="position: absolute; top: -10%; left: 15%; z-index: 1; width: 70%" src="../assets/device-pile.png" alt="Test" fluid center></b-img>
-                    </b-col>
-            </b-row>
-
-        </b-container>
-
-    </div>
+    </b-container>
 </template>
 
 <script>
-export default {
-  name: "Home",
-};
+    export default {
+        name: "Home",
+    };
 </script>
 
 <style scoped lang="scss">
-/*     .home {
-        background-image: url('../assets/background_home.png');
-        height: 95vh;
+    .titre {
+        background-image: url("../assets/background_home.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+
+    .video-tv {
+        z-index: 1;
         width: 100%;
-
-        .text {
-            width: 50vw;
-            color: white;
-            margin-left: 25vw;
-            padding-top: 25vh;
-
-            .text_1 {
-                padding-bottom: 25px;
-
-                h1 {
-                    font-weight: bold;
-                    font-size: 70px;
-                }
-            }
-
-            .text_2, .text_3 {
-                h2, h4 {
-                    font-weight: bold;
-                }
-
-                padding-bottom: 25px;
-            }
-
-            .form {
-                input {
-                    padding: 22px;
-                    width: 20vw;
-                }
-
-                button {
-                    padding: 20px;
-                    font-size: 20px;
-                    background-color: #e50914;
-                    border-radius: 0;
-                }
-            }
-        }
+        height: 100%;
     }
 
-    .section_1, .section_2, .section_3 {
-        border-top: 8px solid #222;
-        width: 100%;
-        height: 65vh;
-        background-color: black;
-        color: white;
+    .video-mac {
+        position: relative;
+        z-index: 1;
+        width: 70%;
+        left: 15%;
+        height: 100%;
     }
-
-    .section_1, .section_3 {
-        .container {
-            .text_left {
-                padding-top: 120px;
-                text-align: left;
-
-                h1 {
-                    font-weight: bold;
-                    font-size: 50px;
-                    padding-bottom: 25px;
-                }
-
-                h2 {
-                    font-size: 30px;
-                }
-            }
-
-            .image_right {
-                padding-top: 30px;
-            }
-        }
-    }
-
-    .section_2 {
-        .container {
-            padding-top: 120px;
-            text-align: left;
-
-            h1 {
-                font-weight: bold;
-                font-size: 50px;
-                padding-bottom: 25px;
-            }
-
-            h2 {
-                font-size: 30px;
-            }
-        }
-    } */
-.titre {
-  background-image: url("../assets/background_home.png");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
-}
-
-.video-tv {
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-}
-
-.video-mac {
-  position: relative;
-  z-index: 1;
-  width: 70%;
-  left: 15%;
-  height: 100%;
-}
 </style>
