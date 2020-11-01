@@ -6,7 +6,7 @@
                 <span v-if="company !== companies[0]" class="separator">-</span>
                 {{company.name}}
                 <span class="logo" v-if="company.logo_path">
-                    <img :src="`https://image.tmdb.org/t/p/w370_and_h556_bestv2/${company.logo_path}`">
+                    <img :src="`https://image.tmdb.org/t/p/w370_and_h556_bestv2/${company.logo_path}`" alt="">
                 </span>
             </span>
             <span v-else>Pas d'entreprise de production disponible</span>

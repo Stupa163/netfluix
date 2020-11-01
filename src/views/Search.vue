@@ -1,6 +1,7 @@
 <template>
     <div class="search">
-        <input v-model="query" type="text" @keyup="sendSearchRequest" class="search_input" placeholder="Titre du film">
+        <label for="query"/>
+        <input id="query" v-model="query" type="text" @keyup="sendSearchRequest" class="search_input" placeholder="Titre du film">
         <b-container class="movie_container">
             <b-row>
                 <b-col col cols="12" sm="2" class="d-none d-lg-block buttons_container">

@@ -14,14 +14,14 @@ export default {
                   "Content-Type": "application/json",
                 },
               };
-        
+
               return fetch(`${APIConfig.apiUrl}/account/${account_id}/watchlist?api_key=${APIConfig.apiKey}&session_id=${session_id}`,options)
                 .then((response) => response.json())
-                    .then((json) => {
+                    .then(() => {
                         return true
                     })
                 .catch(err => {
-                    console.error(err)
+                    console.error(err);
                     return false
                 });
         },
@@ -37,7 +37,7 @@ export default {
                   "Content-Type": "application/json",
                 },
               };
-        
+
               return fetch(
                 `${APIConfig.apiUrl}/account/${account_id}/watchlist?api_key=${APIConfig.apiKey}&session_id=${session_id}`,
                 options
@@ -45,10 +45,10 @@ export default {
                 .then((response) => response.json())
                     .then(json => {
                         console.log(json);
-                        return true 
+                        return true
                     })
                 .catch(err => {
-                    console.error(err)
+                    console.error(err);
                     return false
                 });
         },
@@ -56,16 +56,12 @@ export default {
             return fetch(`${APIConfig.apiUrl}/account/${account_id}/watchlist/movies?api_key=${APIConfig.apiKey}&session_id=${session_id}`)
                 .then(response => response.json())
                     .then(json => {
-    
+
                         // Si le film actuelle est présent dans dans la watchlist renvoie true sinon false
-                        let res = json.results.filter(id_exist => id_exist.id == movie_id)
-    
+                        let res = json.results.filter(id_exist => id_exist.id == movie_id);
+
                         //Test du filtre
-                        if(Array.isArray(res) && res.length){
-                          return true
-                        }else{
-                          return false
-                        }
+                        return !!(Array.isArray(res) && res.length);
                     })
                 .catch(err => console.error(err))
         },
