@@ -131,12 +131,8 @@
 </template>
 
 <script>
-import VideoPlayerTV from "../components/VideoPlayerTV";
-import VideoPlayerMac from "../components/VideoPlayerMac";
-
 export default {
   name: "Home",
-  components: { VideoPlayerMac, VideoPlayerTV },
 };
 </script>
 
