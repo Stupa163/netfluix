@@ -1,16 +1,18 @@
 <template>
-    <b-container class="watchlist container-fluid">
-        <b-row>
-            <b-col>
-                <h1 class="text-light" style="margin-left: 10vh">Mes séries...</h1>
-            </b-col>
-        </b-row>
-        <b-row>
-            <b-col>
-                <MovieList :movies="watchlist" :loading="false"/>
-            </b-col>
-        </b-row>
-    </b-container>
+    <div class="watchlist">
+        <b-container>
+            <b-row>
+                <b-col>
+                    <h1 class="text-light" style="margin-left: 10vh">Mes séries...</h1>
+                </b-col>
+            </b-row>
+            <b-row>
+                <b-col>
+                    <MovieList :movies="watchlist" :loading="false"/>
+                </b-col>
+            </b-row>
+        </b-container>
+    </div>
 </template>
 
 <script>
@@ -43,10 +45,13 @@
 
 <style lang="scss" scoped>
     .watchlist {
+        background-color: #141414;
         padding-top: 15vh;
+        min-height: 100vh;
 
-        &.container-fluid {
-            background-color: #141414;
+        .container {
+            max-width: 100vw;
         }
     }
 </style>
+
