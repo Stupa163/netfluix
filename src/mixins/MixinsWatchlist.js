@@ -44,7 +44,6 @@ export default {
               )
                 .then((response) => response.json())
                     .then(json => {
-                        console.log(json);
                         return true
                     })
                 .catch(err => {
@@ -71,7 +70,6 @@ export default {
             )
               .then((response) => response.json())
               .then(json => {
-                console.log("✔️ Watchlist obtenue !");
                 return json.results;
               })
               .catch((err) => console.error(err));

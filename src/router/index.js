@@ -64,7 +64,6 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    console.log(`📍 De ${from.name} vers ${to.name}`);
     if(to.matched.some(record => record.meta.requiredAuth)){
         if(!store.getters.isLogged){
             next({name: 'Home'})

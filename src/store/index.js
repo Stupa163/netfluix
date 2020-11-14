@@ -45,7 +45,6 @@ export default new Vuex.Store({
   actions: {
     /* Authentification (A mettre dans un module)*/
     async getRequestToken(context) {
-      console.log("📜 Récup token...");
 
       return fetch(
         `${APIConfig.apiUrl}/authentication/token/new?api_key=${APIConfig.apiKey}`
@@ -76,7 +75,6 @@ export default new Vuex.Store({
       )
         .then((response) => response.json())
         .then((json) => {
-          console.log("✔️ Session ID obtenue !");
 
           //Stockage dans le local storage
           localStorage.setItem("session_id", json.session_id);
@@ -96,8 +94,6 @@ export default new Vuex.Store({
       )
         .then((response) => response.json())
         .then((json) => {
-          console.log("✔️ Infos utilisateur obtenue !");
-          console.log(json);
 
           //Mise à jour objet user
           context.commit("setUser", json);
@@ -124,8 +120,6 @@ export default new Vuex.Store({
       )
         .then((response) => response.json())
         .then((json) => {
-          console.log("✔️ Utilisateur déconnecté !");
-          console.log(json);
 
           //Supprimé du localstorage
           localStorage.removeItem("session_id");
