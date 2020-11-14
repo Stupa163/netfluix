@@ -10,11 +10,9 @@ export default {
                     let genre = genres.filter((genre) => genre.id === id);
                     (genre[0].model) ? excludeMovie = false : null;
                     movie.hidden = excludeMovie;
-                    console.log(excludeMovie)
                 })
             });
 
-            console.log(movies);
             return movies;
         }
     }
