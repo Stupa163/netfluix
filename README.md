@@ -1,19 +1,8 @@
-# netfluix
+# Netfluix
 
-## Project setup
-```
-npm install
-```
+Magnifiquement hébergé : https://netfluix.netlify.app
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## Participants
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- Rémi BOSGAERD
+- Nicolas SALA (hors Ynov)
